@@ -92,7 +92,6 @@
                         </goals>
                         <configuration>
                             <outputDirectory>${testClassesDir}</outputDirectory>
-                            <!--<outputDirectory>${basedir}/target/test-classes</outputDirectory>-->
                             <resources>
                                 <resource>
                                     <directory>${profile.specific.resource.directory}/test</directory>
