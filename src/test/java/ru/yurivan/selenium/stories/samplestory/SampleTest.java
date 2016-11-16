@@ -1,33 +1,26 @@
 package ru.yurivan.selenium.stories.samplestory;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import ru.yurivan.selenium.litecart.managers.Browser;
+import ru.yurivan.selenium.litecart.test.BaseWebUITest;
 
-public class SampleTest {
-    private WebDriver webDriver;
-    private WebDriverWait wait;
-
-    @BeforeClass
+public class SampleTest extends BaseWebUITest {
+    @BeforeClass(dependsOnMethods = "setupBaseWebUITest")
     public void setup() {
-        webDriver = new ChromeDriver();
-        wait = new WebDriverWait(webDriver, 10);
+        Browser.start();
     }
 
-    @AfterClass
+    @AfterClass(dependsOnMethods = "shutdownBaseWebUITest")
     public void shutdown() {
-        if (webDriver != null) {
-            webDriver.close();
-        }
+        Browser.quit();
     }
 
     @Test(description = "Sample test.")
     public void sampleTest() {
-        webDriver.get("http://www.google.com");
-        wait.until(ExpectedConditions.titleContains("Google"));
+        Browser.driver().get("http://www.google.com");
+        Browser.defaultWait().until(ExpectedConditions.titleContains("Google"));
     }
 }

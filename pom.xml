@@ -11,8 +11,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework.version>4.2.6.RELEASE</org.springframework.version>
+
         <testClassesDir>${basedir}/target/test-classes</testClassesDir>
         <suiteDir>${testClassesDir}/suites</suiteDir>
+
+        <baseUrl>http://localhost/litecart</baseUrl>
     </properties>
 
     <dependencies>
@@ -33,13 +36,13 @@
     <build>
         <resources>
             <resource>
-                <directory>${profile.specific.resource.directory}/main</directory>
+                <directory>${profile.specific.resource.directory}</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
         <testResources>
             <testResource>
-                <directory>${profile.specific.resource.directory}/test</directory>
+                <directory>${profile.specific.resource.directory}</directory>
                 <filtering>true</filtering>
             </testResource>
             <testResource>
@@ -78,7 +81,7 @@
                             <outputDirectory>${basedir}/target/classes</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${profile.specific.resource.directory}/main</directory>
+                                    <directory>${profile.specific.resource.directory}</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
@@ -94,7 +97,7 @@
                             <outputDirectory>${testClassesDir}</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${profile.specific.resource.directory}/test</directory>
+                                    <directory>${profile.specific.resource.directory}</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
