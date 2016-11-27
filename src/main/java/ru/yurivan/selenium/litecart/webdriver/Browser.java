@@ -1,21 +1,21 @@
-package ru.yurivan.selenium.litecart.managers;
+package ru.yurivan.selenium.litecart.webdriver;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Browser {
-    private static WebDriver driver;
-    private static WebDriverWait defaultWait;
+    private WebDriver driver;
+    private WebDriverWait defaultWait;
 
-    public static void start() {
+    public void start(DesiredCapabilities desiredCapabilities) {
         if (null == driver) {
-            driver = new ChromeDriver();
+            driver = WebDriverProvider.createWebDriver(desiredCapabilities);
             defaultWait = new WebDriverWait(driver, 10);
         }
     }
 
-    public static void quit() {
+    public void quit() {
         if (null != driver) {
             driver.quit();
             driver = null;
@@ -23,17 +23,17 @@ public class Browser {
         }
     }
 
-    public static WebDriver driver() {
+    public WebDriver driver() {
         ensureBrowserRunning();
         return driver;
     }
 
-    public static WebDriverWait defaultWait() {
+    public WebDriverWait defaultWait() {
         ensureBrowserRunning();
         return defaultWait;
     }
 
-    private static void ensureBrowserRunning() {
+    private void ensureBrowserRunning() {
         if (null == driver) {
             throw new IllegalStateException("Unable to complete operation. You should start browser first.");
         }

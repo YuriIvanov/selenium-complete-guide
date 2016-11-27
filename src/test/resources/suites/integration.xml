@@ -4,6 +4,6 @@
 <suite name="All tests suite." parallel="tests" thread-count="1">
     <suite-files>
         <suite-file path="login.xml"/>
-        <suite-file path="sample.xml"/>
+        <suite-file path="adminpanelsections.xml"/>
     </suite-files>
 </suite>

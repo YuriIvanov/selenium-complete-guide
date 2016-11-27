@@ -4,7 +4,7 @@
 <suite name="Login tests suite." parallel="tests" thread-count="1">
     <test name="Login tests.">
         <classes>
-            <class name="ru.yurivan.selenium.stories.adminpanel.TestLogin"/>
+            <class name="ru.yurivan.selenium.stories.adminpanel.AdminPanelSections"/>
         </classes>
     </test>
 </suite>

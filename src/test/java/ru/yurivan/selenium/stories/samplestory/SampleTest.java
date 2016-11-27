@@ -4,23 +4,26 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import ru.yurivan.selenium.litecart.managers.Browser;
+import ru.yurivan.selenium.litecart.webdriver.Browser;
 import ru.yurivan.selenium.litecart.test.BaseWebUITest;
 
 public class SampleTest extends BaseWebUITest {
+    private Browser browser;
+
     @BeforeClass(dependsOnMethods = "setupBaseWebUITest")
     public void setup() {
-        Browser.start();
+        browser = new Browser();
+        browser.start(null);
     }
 
     @AfterClass(dependsOnMethods = "shutdownBaseWebUITest")
     public void shutdown() {
-        Browser.quit();
+        browser.quit();
     }
 
     @Test(description = "Sample test.")
     public void sampleTest() {
-        Browser.driver().get("http://www.google.com");
-        Browser.defaultWait().until(ExpectedConditions.titleContains("Google"));
+        browser.driver().get("http://www.google.com");
+        browser.defaultWait().until(ExpectedConditions.titleContains("Google"));
     }
 }
