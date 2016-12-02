@@ -3,10 +3,11 @@ package ru.yurivan.selenium.stories.shop;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import ru.yurivan.selenium.litecart.managers.LiteCartSettingsManager;
+import ru.yurivan.selenium.litecart.applogic.CommonAppLogic;
 import ru.yurivan.selenium.litecart.test.BaseWebUITest;
 import ru.yurivan.selenium.litecart.utils.SoftAssert;
 import ru.yurivan.selenium.litecart.webdriver.Browser;
@@ -14,6 +15,10 @@ import ru.yurivan.selenium.litecart.webdriver.Browser;
 import java.util.List;
 
 public class MainPage extends BaseWebUITest {
+    private static final By PRODUCTS_LOCATOR_MOST_POPULAR = By.cssSelector("#box-most-popular ul[class*=products] li");
+    private static final By PRODUCTS_LOCATOR_CAMPAIGNS = By.cssSelector("#box-campaigns ul[class*=products] li");
+    private static final By PRODUCTS_LOCATOR_LATEST = By.cssSelector("#box-latest-products ul[class*=products] li");
+
     private Browser browser;
 
     @BeforeClass(dependsOnMethods = "setupBaseWebUITest")
@@ -31,19 +36,65 @@ public class MainPage extends BaseWebUITest {
     public void productsSticker() {
         SoftAssert sa = new SoftAssert("Check products sticker presence.");
 
-        browser.driver().get(LiteCartSettingsManager.getInstance().getBaseUrl());
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(By.id("logotype-wrapper")));
+        CommonAppLogic.openShopMainPage(browser);
 
-        checkProductsSticker(By.cssSelector("#box-most-popular ul[class*=products] li"), sa);
-        checkProductsSticker(By.cssSelector("#box-campaigns ul[class*=products] li"), sa);
-        checkProductsSticker(By.cssSelector("#box-latest-products ul[class*=products] li"), sa);
+        checkProductsSticker(PRODUCTS_LOCATOR_MOST_POPULAR, sa);
+        checkProductsSticker(PRODUCTS_LOCATOR_CAMPAIGNS, sa);
+        checkProductsSticker(PRODUCTS_LOCATOR_LATEST, sa);
 
         sa.assertAll();
     }
 
     @Test(description = "Check product page.")
     public void checkProductPage() {
+        CommonAppLogic.openShopMainPage(browser);
 
+        List<WebElement> campaignsProducts = browser.driver().findElements(PRODUCTS_LOCATOR_CAMPAIGNS);
+        WebElement firstCampaignsProduct = campaignsProducts.get(0);
+
+        final String productNameOnMainPage = firstCampaignsProduct.findElement(By.cssSelector("div.name")).getText();
+
+        WebElement productRegularPriceOnMainPageElement =
+                firstCampaignsProduct.findElement(By.cssSelector(".price-wrapper .regular-price"));
+        final String productRegularPriceOnMainPage = productRegularPriceOnMainPageElement.getText().substring(1);
+
+        WebElement productCampaignPriceOnMainPageElement =
+                firstCampaignsProduct.findElement(By.cssSelector(".price-wrapper .campaign-price"));
+        final String productCampaignPriceOnMainPage = productCampaignPriceOnMainPageElement.getText().substring(1);
+
+        firstCampaignsProduct.click();
+        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(By.id("box-product")));
+
+        WebElement productBox = browser.driver().findElement(By.id("box-product"));
+        final String productNameOnProductPage = productBox.findElement(By.cssSelector("div h1.title")).getText();
+
+        WebElement productRegularPriceOnProductPageElement =
+                productBox.findElement(By.cssSelector(".information .price-wrapper .regular-price"));
+        final String productRegularPriceOnProductPage = productRegularPriceOnProductPageElement.getText().substring(1);
+
+        WebElement productCampaignPriceOnProductPageElement = 
+                productBox.findElement(By.cssSelector(".information .price-wrapper .campaign-price"));
+        final String productCampaignPriceOnProductPage =
+                productCampaignPriceOnProductPageElement.getText().substring(1);
+
+        Assert.assertEquals(
+                productNameOnProductPage,
+                productNameOnMainPage,
+                "Product name on product page is not the same as product name on shop main page." +
+                        "\nActual: " + productNameOnProductPage +
+                        "\nExpected: " + productNameOnMainPage);
+        Assert.assertEquals(
+                productRegularPriceOnProductPage,
+                productRegularPriceOnMainPage,
+                "Product regular price on product page is not the same as product regular price on shop main page." +
+                        "\nActual: " + productRegularPriceOnProductPage +
+                        "\nExpected: " + productRegularPriceOnMainPage);
+        Assert.assertEquals(
+                productCampaignPriceOnProductPage,
+                productCampaignPriceOnMainPage,
+                "Product campaign price on product page is not the same as campaign price on shop main page." +
+                        "\nActual: " + productCampaignPriceOnProductPage +
+                        "\nExpected: " + productCampaignPriceOnMainPage);
     }
 
     private void checkProductsSticker(By productsLocator, SoftAssert sa) {

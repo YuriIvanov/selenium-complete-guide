@@ -1,4 +1,4 @@
-package ru.yurivan.selenium.litecart.utils;
+package ru.yurivan.selenium.litecart.applogic;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +12,8 @@ public class CommonAppLogic {
             settingsManager.getAdminPanelAddress() + "/?app=countries&doc=countries";
     private static final String ADMIN_PANEL_GEO_ZONES_SECTION_URL =
             settingsManager.getAdminPanelAddress() + "?app=geo_zones&doc=geo_zones";
+
+    private static final By SHOP_MAIN_PAGE_WAIT_LOCATOR = By.id("logotype-wrapper");
 
     private static final By ADMIN_PANEL_COUNTRIES_SECTION_WAIT_LOCATOR = By.cssSelector("[name=countries_form]");
     private static final By ADMIN_PANEL_GEO_ZONES_SECTION_WAIT_LOCATOR = By.cssSelector("[name=geo_zones_form]");
@@ -27,6 +29,11 @@ public class CommonAppLogic {
         browser.driver().findElement(By.name("login")).click();
 
         browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(By.id("sidebar")));
+    }
+
+    public static void openShopMainPage(Browser browser) {
+        browser.driver().get(settingsManager.getBaseUrl());
+        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(SHOP_MAIN_PAGE_WAIT_LOCATOR));
     }
 
     public static void openAdminPanelCountriesSection(Browser browser) {
