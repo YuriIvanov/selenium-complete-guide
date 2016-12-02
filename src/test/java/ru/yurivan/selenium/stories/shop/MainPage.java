@@ -41,6 +41,11 @@ public class MainPage extends BaseWebUITest {
         sa.assertAll();
     }
 
+    @Test(description = "Check product page.")
+    public void checkProductPage() {
+
+    }
+
     private void checkProductsSticker(By productsLocator, SoftAssert sa) {
         List<WebElement> products = browser.driver().findElements(productsLocator);
         for (WebElement product : products) {

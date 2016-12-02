@@ -4,7 +4,7 @@
 <suite name="Temp suite." parallel="tests" thread-count="1">
     <test name="Temp tests.">
         <classes>
-            <class name="ru.yurivan.selenium.stories.shop.MainPage"/>
+            <class name="ru.yurivan.selenium.stories.adminpanel.Countries"/>
         </classes>
     </test>
 </suite>

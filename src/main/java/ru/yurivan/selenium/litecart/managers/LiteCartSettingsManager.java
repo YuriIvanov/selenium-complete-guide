@@ -13,7 +13,7 @@ public class LiteCartSettingsManager {
     private LiteCartSettingsManager() {
         ResourceBundle rs = ResourceBundle.getBundle("common");
         BASE_URL = rs.getString("litecart.base_url");
-        ADMIN_PANEL_ADDRESS = BASE_URL + "/admin/";
+        ADMIN_PANEL_ADDRESS = BASE_URL + "/admin";
     }
 
     public static LiteCartSettingsManager getInstance() {
