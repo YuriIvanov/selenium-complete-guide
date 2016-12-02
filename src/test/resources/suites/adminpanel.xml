@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Admin panel test suite." parallel="tests" thread-count="1">
+    <test name="Admin panel login test.">
+        <classes>
+            <class name="ru.yurivan.selenium.stories.adminpanel.Login"/>
+        </classes>
+    </test>
+    <test name="Admin panel sections test.">
+        <classes>
+            <class name="ru.yurivan.selenium.stories.adminpanel.AdminPanelSections"/>
+        </classes>
+    </test>
+    <test name="Admin panel countries section test.">
+        <classes>
+            <class name="ru.yurivan.selenium.stories.adminpanel.CountriesSection"/>
+        </classes>
+    </test>
+    <test name="Admin panel geo zones sections test.">
+        <classes>
+            <class name="ru.yurivan.selenium.stories.adminpanel.GeoZonesSection"/>
+        </classes>
+    </test>
+</suite>

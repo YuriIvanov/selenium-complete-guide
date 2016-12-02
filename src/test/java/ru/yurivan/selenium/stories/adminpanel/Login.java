@@ -8,7 +8,7 @@ import ru.yurivan.selenium.litecart.webdriver.Browser;
 import ru.yurivan.selenium.litecart.managers.LiteCartSettingsManager;
 import ru.yurivan.selenium.litecart.test.BaseWebUITest;
 
-public class TestLogin extends BaseWebUITest {
+public class Login extends BaseWebUITest {
     private LiteCartSettingsManager settingsManager;
     private Browser browser;
 

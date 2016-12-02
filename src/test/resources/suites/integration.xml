@@ -3,7 +3,8 @@
 
 <suite name="All tests suite." parallel="tests" thread-count="1">
     <suite-files>
-        <suite-file path="login.xml"/>
-        <suite-file path="adminpanelsections.xml"/>
+        <suite-file path="samplestory.xml"/>
+        <suite-file path="shop.xml"/>
+        <suite-file path="adminpanel.xml"/>
     </suite-files>
 </suite>

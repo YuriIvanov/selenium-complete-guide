@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Main page suite." parallel="tests" thread-count="1">
+<suite name="Shop test suite." parallel="tests" thread-count="1">
     <test name="Main page tests.">
         <classes>
             <class name="ru.yurivan.selenium.stories.shop.MainPage"/>

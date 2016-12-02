@@ -10,23 +10,19 @@ import org.testng.annotations.Test;
 import ru.yurivan.selenium.litecart.managers.LiteCartSettingsManager;
 import ru.yurivan.selenium.litecart.test.BaseWebUITest;
 import ru.yurivan.selenium.litecart.utils.CommonAppLogic;
+import ru.yurivan.selenium.litecart.utils.StringUtils;
 import ru.yurivan.selenium.litecart.webdriver.Browser;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Countries extends BaseWebUITest {
-    private static final String ADMIN_PANEL_COUNTRIES_SECTION_URL =
-            LiteCartSettingsManager.getInstance().getAdminPanelAddress() + "/?app=countries&doc=countries";
-
-    private static final By countryCellsLocator =
-            By.cssSelector("[name=countries_form] [class=dataTable] tr[class=row] td:nth-child(5) a");
-    private static final By countriesWithGeoZonesLocator =
+public class CountriesSection extends BaseWebUITest {
+    private static final By COUNTRY_CELLS_LOCATOR =
+            By.cssSelector("[name=countries_form] .dataTable tr.row td:nth-child(5) a");
+    private static final By COUNTRIES_WITH_GEO_ZONES_LOCATOR =
             By.xpath(
                     "//*[@name='countries_form']//*[@class='dataTable']//tr[@class='row']/td[6][text()!=0]/../td[5]/a");
-    private static final By countryZoneNameCellsLocator =
+    private static final By COUNTRY_ZONE_NAME_CELLS_LOCATOR =
             By.xpath("//*[@id='table-zones']//tbody/tr[not(@*)]/td[3][text()!='']");
 
     private LiteCartSettingsManager settingsManager;
@@ -47,16 +43,17 @@ public class Countries extends BaseWebUITest {
     @Test(description = "Check countries sorting order and their zones sorting order.")
     public void checkCountriesSortingOrder() {
         CommonAppLogic.doLogin(browser, settingsManager.getAdminPanelLogin(), settingsManager.getAdminPanelPassword());
+        CommonAppLogic.openAdminPanelCountriesSection(browser);
 
-        browser.driver().get(ADMIN_PANEL_COUNTRIES_SECTION_URL);
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(By.id("sidebar")));
-
-        List<WebElement> countryCells = browser.driver().findElements(countryCellsLocator);
+        List<WebElement> countryCells = browser.driver().findElements(COUNTRY_CELLS_LOCATOR);
         List<String> countriesNamesOriginal =
-                countryCells.stream().map(WebElement::getText).collect(Collectors.toList());
+                countryCells
+                        .stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList());
 
-        List<String> countriesNamesAlphabeticallySorted = new ArrayList<>(countriesNamesOriginal);
-        Collections.sort(countriesNamesAlphabeticallySorted);
+        List<String> countriesNamesAlphabeticallySorted =
+                StringUtils.makeAlphabeticallySortedStringListCopy(countriesNamesOriginal);
 
         // Check countries alphabetic order.
         Assert.assertEquals(
@@ -64,12 +61,12 @@ public class Countries extends BaseWebUITest {
                 countriesNamesAlphabeticallySorted,
                 "Countries are not alphabetically sorted.");
 
-        List<WebElement> countriesWithZones = browser.driver().findElements(countriesWithGeoZonesLocator);
+        List<WebElement> countriesWithZones = browser.driver().findElements(COUNTRIES_WITH_GEO_ZONES_LOCATOR);
         for (int i = 0; i < countriesWithZones.size(); ++i) {
             checkCountryZonesOrder(countriesWithZones.get(i));
 
             // Refresh references.
-            countriesWithZones = browser.driver().findElements(countriesWithGeoZonesLocator);
+            countriesWithZones = browser.driver().findElements(COUNTRIES_WITH_GEO_ZONES_LOCATOR);
         }
     }
 
@@ -78,12 +75,14 @@ public class Countries extends BaseWebUITest {
         country.click();
         browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(By.id("table-zones")));
 
-        List<WebElement> countryZoneCells = browser.driver().findElements(countryZoneNameCellsLocator);
+        List<WebElement> countryZoneCells = browser.driver().findElements(COUNTRY_ZONE_NAME_CELLS_LOCATOR);
         List<String> countryZoneNamesOriginal =
-                countryZoneCells.stream().map(WebElement::getText).collect(Collectors.toList());
-
-        List<String> countryZoneNamesAlphabeticallySorted = new ArrayList<>(countryZoneNamesOriginal);
-        Collections.sort(countryZoneNamesAlphabeticallySorted);
+                countryZoneCells
+                        .stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList());
+        List<String> countryZoneNamesAlphabeticallySorted =
+                StringUtils.makeAlphabeticallySortedStringListCopy(countryZoneNamesOriginal);
 
         // Check country zones alphabetic order.
         Assert.assertEquals(
@@ -91,7 +90,6 @@ public class Countries extends BaseWebUITest {
                 countryZoneNamesAlphabeticallySorted,
                 "Country " + countryName + " zones are not alphabetically sorted.");
 
-        browser.driver().get(ADMIN_PANEL_COUNTRIES_SECTION_URL);
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(By.id("sidebar")));
+        CommonAppLogic.openAdminPanelCountriesSection(browser);
     }
 }
