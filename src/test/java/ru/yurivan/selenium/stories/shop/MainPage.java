@@ -57,10 +57,13 @@ public class MainPage extends BaseWebUITest {
         WebElement productRegularPriceOnMainPageElement =
                 firstCampaignsProduct.findElement(By.cssSelector(".price-wrapper .regular-price"));
         final String productRegularPriceOnMainPage = productRegularPriceOnMainPageElement.getText().substring(1);
+        final String productRegularPriceClassesOnMainPage = productRegularPriceOnMainPageElement.getAttribute("class");
 
         WebElement productCampaignPriceOnMainPageElement =
                 firstCampaignsProduct.findElement(By.cssSelector(".price-wrapper .campaign-price"));
         final String productCampaignPriceOnMainPage = productCampaignPriceOnMainPageElement.getText().substring(1);
+        final String productCampaignPriceClassesOnMainPage =
+                productCampaignPriceOnMainPageElement.getAttribute("class");
 
         firstCampaignsProduct.click();
         browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(By.id("box-product")));
@@ -71,11 +74,15 @@ public class MainPage extends BaseWebUITest {
         WebElement productRegularPriceOnProductPageElement =
                 productBox.findElement(By.cssSelector(".information .price-wrapper .regular-price"));
         final String productRegularPriceOnProductPage = productRegularPriceOnProductPageElement.getText().substring(1);
+        final String productRegularPriceClassesOnProductPage =
+                productRegularPriceOnProductPageElement.getAttribute("class");
 
         WebElement productCampaignPriceOnProductPageElement =
                 productBox.findElement(By.cssSelector(".information .price-wrapper .campaign-price"));
         final String productCampaignPriceOnProductPage =
                 productCampaignPriceOnProductPageElement.getText().substring(1);
+        final String productCampaignPriceClassesOnProductPage =
+                productCampaignPriceOnProductPageElement.getAttribute("class");
 
         Assert.assertEquals(
                 productNameOnProductPage,
@@ -95,6 +102,24 @@ public class MainPage extends BaseWebUITest {
                 "Product campaign price on product page is not the same as campaign price on shop main page." +
                         "\nActual: " + productCampaignPriceOnProductPage +
                         "\nExpected: " + productCampaignPriceOnMainPage);
+
+        // Вообще в этой проверке стилей нет необходимости, поскольку css-локаторы, с помощью которых мы берем одни
+        // и те жи цены на разных страницах, итак указывают, что у одинаковых цен должен быть один и только один
+        // определенный класс.
+        Assert.assertEquals(
+                productRegularPriceClassesOnProductPage,
+                productRegularPriceClassesOnMainPage,
+                "Product regular price classes on product page is not the same as" +
+                " product regular price classes on shop main page." +
+                "\nActual: " + productRegularPriceClassesOnProductPage +
+                "\nExpected: " + productRegularPriceClassesOnMainPage);
+        Assert.assertEquals(
+                productCampaignPriceClassesOnProductPage,
+                productCampaignPriceClassesOnMainPage,
+                "Product campaign price classes on product page is not the same as" +
+                " product campaign price classes on shop main page." +
+                "\nActual: " + productCampaignPriceClassesOnProductPage +
+                "\nExpected: " + productCampaignPriceClassesOnMainPage);
     }
 
     private void checkProductsSticker(By productsLocator, SoftAssert sa) {
