@@ -13,7 +13,7 @@ public class CommonAppLogic {
     private static final String ADMIN_PANEL_GEO_ZONES_SECTION_URL =
             settingsManager.getAdminPanelAddress() + "?app=geo_zones&doc=geo_zones";
 
-    private static final By SHOP_MAIN_PAGE_WAIT_LOCATOR = By.id("logotype-wrapper");
+    private static final By SHOP_MAIN_PAGE_WAIT_LOCATOR = By.id("box-logotypes");
 
     private static final By ADMIN_PANEL_COUNTRIES_SECTION_WAIT_LOCATOR = By.cssSelector("[name=countries_form]");
     private static final By ADMIN_PANEL_GEO_ZONES_SECTION_WAIT_LOCATOR = By.cssSelector("[name=geo_zones_form]");

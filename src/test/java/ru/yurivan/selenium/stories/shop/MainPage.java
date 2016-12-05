@@ -72,7 +72,7 @@ public class MainPage extends BaseWebUITest {
                 productBox.findElement(By.cssSelector(".information .price-wrapper .regular-price"));
         final String productRegularPriceOnProductPage = productRegularPriceOnProductPageElement.getText().substring(1);
 
-        WebElement productCampaignPriceOnProductPageElement = 
+        WebElement productCampaignPriceOnProductPageElement =
                 productBox.findElement(By.cssSelector(".information .price-wrapper .campaign-price"));
         final String productCampaignPriceOnProductPage =
                 productCampaignPriceOnProductPageElement.getText().substring(1);

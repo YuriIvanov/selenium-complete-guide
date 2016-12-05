@@ -7,4 +7,9 @@
             <class name="ru.yurivan.selenium.stories.shop.MainPage"/>
         </classes>
     </test>
+    <test name="Customer tests.">
+        <classes>
+            <class name="ru.yurivan.selenium.stories.shop.Customer"/>
+        </classes>
+    </test>
 </suite>
