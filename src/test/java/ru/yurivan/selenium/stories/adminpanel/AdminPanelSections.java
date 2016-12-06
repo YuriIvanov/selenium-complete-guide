@@ -14,7 +14,7 @@ import ru.yurivan.selenium.litecart.webdriver.Browser;
 import java.util.List;
 
 public class AdminPanelSections extends BaseWebUITest {
-    private static final By headerLocator = By.cssSelector("td#content h1");
+    private static final By HEADER_LOCATOR = By.cssSelector("td#content h1");
     private static final By topSectionsLocator = By.cssSelector("ul#box-apps-menu li#app-");
     private static final By subsectionsLocator = By.cssSelector("ul.docs li");
 
@@ -44,7 +44,7 @@ public class AdminPanelSections extends BaseWebUITest {
             WebElement section = sections.get(i);
 
             section.click();
-            checkHeaderPresence();
+            checkHeaderPresence(null);
 
             // Refresh current section.
             section = browser.driver().findElements(topSectionsLocator).get(i);
@@ -55,9 +55,10 @@ public class AdminPanelSections extends BaseWebUITest {
                 // Walk though subsections.
                 for (int j = 0; j < subsections.size(); ++j) {
                     WebElement subsection = subsections.get(j);
-                    subsection.click();
 
-                    checkHeaderPresence();
+                    WebElement header = browser.driver().findElement(HEADER_LOCATOR);
+                    subsection.click();
+                    checkHeaderPresence(header);
 
                     // Refresh current subsection.
                     section = browser.driver().findElements(topSectionsLocator).get(i);
@@ -70,7 +71,10 @@ public class AdminPanelSections extends BaseWebUITest {
         }
     }
 
-    private void checkHeaderPresence() {
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(headerLocator));
+    private void checkHeaderPresence(WebElement headerBeforePageReload) {
+        if (null != headerBeforePageReload) {
+            browser.defaultWait().until(ExpectedConditions.stalenessOf(headerBeforePageReload));
+        }
+        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(HEADER_LOCATOR));
     }
 }

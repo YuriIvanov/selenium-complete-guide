@@ -66,7 +66,7 @@ public class MainPage extends BaseWebUITest {
                 productCampaignPriceOnMainPageElement.getAttribute("class");
 
         firstCampaignsProduct.click();
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(By.id("box-product")));
+        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("box-product")));
 
         WebElement productBox = browser.driver().findElement(By.id("box-product"));
         final String productNameOnProductPage = productBox.findElement(By.cssSelector("div h1.title")).getText();

@@ -104,11 +104,11 @@ public class Customer extends BaseWebUITest {
 
         WebElement createAccountButton = createAccountTable.findElement(By.cssSelector("[name=create_account]"));
         createAccountButton.click();
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR));
+        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR));
 
         WebElement logoutButton = browser.driver().findElement(SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR);
         logoutButton.click();
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(SHOP_MAIN_PAGE_LOGIN_LINK_BUTTON));
+        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(SHOP_MAIN_PAGE_LOGIN_LINK_BUTTON));
 
         WebElement loginForm =
                 browser.driver().findElement(By.cssSelector("#box-account-login [name=login_form] table"));
@@ -117,10 +117,10 @@ public class Customer extends BaseWebUITest {
 
         WebElement loginButton = loginForm.findElement(By.cssSelector("[name=login]"));
         loginButton.click();
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR));
+        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR));
 
         logoutButton = browser.driver().findElement(SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR);
         logoutButton.click();
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(SHOP_MAIN_PAGE_LOGIN_LINK_BUTTON));
+        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(SHOP_MAIN_PAGE_LOGIN_LINK_BUTTON));
     }
 }

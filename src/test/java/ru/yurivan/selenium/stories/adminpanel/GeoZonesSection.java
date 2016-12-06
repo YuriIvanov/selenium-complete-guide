@@ -57,7 +57,7 @@ public class GeoZonesSection extends BaseWebUITest {
         final String countryName = country.getText();
 
         country.click();
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(By.id("table-zones")));
+        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("table-zones")));
 
         List<WebElement> zoneSelectElements = browser.driver().findElements(ZONE_NAME_SELECTS_LOCATOR);
         List<String> zoneNamesOriginal =

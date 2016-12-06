@@ -73,7 +73,7 @@ public class CountriesSection extends BaseWebUITest {
     private void checkCountryZonesOrder(WebElement country) {
         final String countryName = country.getText();
         country.click();
-        browser.defaultWait().until(ExpectedConditions.presenceOfElementLocated(By.id("table-zones")));
+        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("table-zones")));
 
         List<WebElement> countryZoneCells = browser.driver().findElements(COUNTRY_ZONE_NAME_CELLS_LOCATOR);
         List<String> countryZoneNamesOriginal =
