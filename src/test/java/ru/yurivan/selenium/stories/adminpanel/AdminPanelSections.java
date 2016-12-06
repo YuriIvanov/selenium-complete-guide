@@ -43,8 +43,13 @@ public class AdminPanelSections extends BaseWebUITest {
         for (int i = 0; i < sections.size(); ++i) {
             WebElement section = sections.get(i);
 
+            WebElement header = null;
+            if (i != 0) {
+                header = browser.driver().findElement(HEADER_LOCATOR);
+            }
+
             section.click();
-            checkHeaderPresence(null);
+            checkHeaderPresence(header);
 
             // Refresh current section.
             section = browser.driver().findElements(topSectionsLocator).get(i);
@@ -56,7 +61,7 @@ public class AdminPanelSections extends BaseWebUITest {
                 for (int j = 0; j < subsections.size(); ++j) {
                     WebElement subsection = subsections.get(j);
 
-                    WebElement header = browser.driver().findElement(HEADER_LOCATOR);
+                    header = browser.driver().findElement(HEADER_LOCATOR);
                     subsection.click();
                     checkHeaderPresence(header);
 
