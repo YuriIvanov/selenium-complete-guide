@@ -35,7 +35,7 @@ public class AdminPanelSections extends BaseWebUITest {
 
     @Test(description = "Walk through all admin panel sections and subsections.")
     public void walkThroughAdminPanelSections() {
-        CommonAppLogic.doLogin(
+        CommonAppLogic.loginToAdminPanel(
                 browser, settingsManager.getAdminPanelLogin(), settingsManager.getAdminPanelPassword());
 
         // Walk through sections.

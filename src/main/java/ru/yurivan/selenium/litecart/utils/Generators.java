@@ -29,6 +29,6 @@ public class Generators {
      * @return randomly generated string with specified prefix and postfix.
      */
     public static String randomString(String prefix, String postfix, int numBits) {
-        return prefix + new BigInteger(numBits, secureRandom).toString(32) + postfix;
+        return prefix + new BigInteger(numBits, secureRandom).toString(Character.MAX_RADIX) + postfix;
     }
 }

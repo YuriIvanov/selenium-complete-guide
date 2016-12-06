@@ -42,7 +42,7 @@ public class CountriesSection extends BaseWebUITest {
 
     @Test(description = "Check countries sorting order and their zones sorting order.")
     public void checkCountriesSortingOrder() {
-        CommonAppLogic.doLogin(browser, settingsManager.getAdminPanelLogin(), settingsManager.getAdminPanelPassword());
+        CommonAppLogic.loginToAdminPanel(browser, settingsManager.getAdminPanelLogin(), settingsManager.getAdminPanelPassword());
         CommonAppLogic.openAdminPanelCountriesSection(browser);
 
         List<WebElement> countryCells = browser.driver().findElements(COUNTRY_CELLS_LOCATOR);

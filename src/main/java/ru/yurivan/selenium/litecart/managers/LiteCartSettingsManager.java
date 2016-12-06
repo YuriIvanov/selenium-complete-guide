@@ -8,6 +8,9 @@ public class LiteCartSettingsManager {
     private final String ADMIN_PANEL_LOGIN = "admin";
     private final String ADMIN_PANEL_PASSWORD = "admin";
 
+    private final String TEST_DATA_FOLDER_PATH = "/testdata";
+    private final String TEST_DATA_IMAGE_FOLDER_PATH = TEST_DATA_FOLDER_PATH + "/images";
+
     private static LiteCartSettingsManager instance;
 
     private LiteCartSettingsManager() {
@@ -37,5 +40,13 @@ public class LiteCartSettingsManager {
 
     public String getAdminPanelPassword() {
         return ADMIN_PANEL_PASSWORD;
+    }
+
+    public String getTestDataFolderPath() {
+        return TEST_DATA_FOLDER_PATH;
+    }
+
+    public String getTestDataImageFolderPath() {
+        return TEST_DATA_IMAGE_FOLDER_PATH;
     }
 }

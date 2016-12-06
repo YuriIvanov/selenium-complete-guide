@@ -26,7 +26,7 @@ public class Login extends BaseWebUITest {
 
     @Test(description = "Simple login test.")
     public void doLogin() {
-        CommonAppLogic.doLogin(
+        CommonAppLogic.loginToAdminPanel(
                 browser, settingsManager.getAdminPanelLogin(), settingsManager.getAdminPanelPassword());
     }
 }

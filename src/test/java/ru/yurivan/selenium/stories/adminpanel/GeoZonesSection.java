@@ -39,7 +39,7 @@ public class GeoZonesSection extends BaseWebUITest {
 
     @Test(description = "Check geo zones sorting order.")
     public void checkGeoZonesSortingOrder() {
-        CommonAppLogic.doLogin(browser, settingsManager.getAdminPanelLogin(), settingsManager.getAdminPanelPassword());
+        CommonAppLogic.loginToAdminPanel(browser, settingsManager.getAdminPanelLogin(), settingsManager.getAdminPanelPassword());
         CommonAppLogic.openAdminPanelGeoZonesSection(browser);
 
         List<WebElement> countries = browser.driver().findElements(GEO_ZONES_COUNTRY_NAME_CELLS_LOCATORS);
