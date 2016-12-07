@@ -70,9 +70,7 @@ public class CatalogSection extends BaseWebUITest {
                 .findElement(By.cssSelector("[name=code]"))
                 .sendKeys(Generators.randomString("", "", 16));
 
-        // TODO. Select Categories.
-
-        // TODO. Select Product Groups.
+        // Не знаю, нужно ли было выбирать категории и группы. Дефолтные значения вполне подходят.
 
         WebElement quantityField = generalTab.findElement(By.cssSelector("[name=quantity]"));
         quantityField.clear();
