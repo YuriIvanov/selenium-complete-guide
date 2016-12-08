@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.yurivan.selenium.litecart.applogic.CommonAppLogic;
+import ru.yurivan.selenium.litecart.locator.Locators;
 import ru.yurivan.selenium.litecart.test.BaseWebUITest;
 import ru.yurivan.selenium.litecart.utils.Generators;
 import ru.yurivan.selenium.litecart.webdriver.Browser;
@@ -15,11 +16,7 @@ import ru.yurivan.selenium.litecart.webdriver.Browser;
 import java.util.Random;
 
 public class Customer extends BaseWebUITest {
-    private static final By SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR = By.cssSelector("#box-account ul li:nth-child(4) a");
-    private static final By SHOP_MAIN_PAGE_LOGIN_LINK_BUTTON =
-            By.cssSelector("#box-account-login [name=login_form] table [name=login]");
-
-    private static final Random random = new Random();
+    private final Random random = new Random();
 
     private Browser browser;
 
@@ -104,11 +101,13 @@ public class Customer extends BaseWebUITest {
 
         WebElement createAccountButton = createAccountTable.findElement(By.cssSelector("[name=create_account]"));
         createAccountButton.click();
-        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR));
+        browser.defaultWait().until(
+                ExpectedConditions.visibilityOfElementLocated(Locators.SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR));
 
-        WebElement logoutButton = browser.driver().findElement(SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR);
+        WebElement logoutButton = browser.driver().findElement(Locators.SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR);
         logoutButton.click();
-        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(SHOP_MAIN_PAGE_LOGIN_LINK_BUTTON));
+        browser.defaultWait().until(
+                ExpectedConditions.visibilityOfElementLocated(Locators.SHOP_MAIN_PAGE_LOGIN_LINK_BUTTON));
 
         WebElement loginForm =
                 browser.driver().findElement(By.cssSelector("#box-account-login [name=login_form] table"));
@@ -117,10 +116,12 @@ public class Customer extends BaseWebUITest {
 
         WebElement loginButton = loginForm.findElement(By.cssSelector("[name=login]"));
         loginButton.click();
-        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR));
+        browser.defaultWait().until(
+                ExpectedConditions.visibilityOfElementLocated(Locators.SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR));
 
-        logoutButton = browser.driver().findElement(SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR);
+        logoutButton = browser.driver().findElement(Locators.SHOP_MAIN_PAGE_LOGOUT_LINK_LOCATOR);
         logoutButton.click();
-        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(SHOP_MAIN_PAGE_LOGIN_LINK_BUTTON));
+        browser.defaultWait().until(
+                ExpectedConditions.visibilityOfElementLocated(Locators.SHOP_MAIN_PAGE_LOGIN_LINK_BUTTON));
     }
 }

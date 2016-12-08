@@ -15,8 +15,8 @@ import java.util.List;
 
 public class AdminPanelSections extends BaseWebUITest {
     private static final By HEADER_LOCATOR = By.cssSelector("td#content h1");
-    private static final By topSectionsLocator = By.cssSelector("ul#box-apps-menu li#app-");
-    private static final By subsectionsLocator = By.cssSelector("ul.docs li");
+    private static final By TOP_SECTIONS_LOCATOR = By.cssSelector("ul#box-apps-menu li#app-");
+    private static final By SUBSECTIONS_LOCATOR = By.cssSelector("ul.docs li");
 
     private LiteCartSettingsManager settingsManager;
     private Browser browser;
@@ -39,7 +39,7 @@ public class AdminPanelSections extends BaseWebUITest {
                 browser, settingsManager.getAdminPanelLogin(), settingsManager.getAdminPanelPassword());
 
         // Walk through sections.
-        List<WebElement> sections = browser.driver().findElements(topSectionsLocator);
+        List<WebElement> sections = browser.driver().findElements(TOP_SECTIONS_LOCATOR);
         for (int i = 0; i < sections.size(); ++i) {
             WebElement section = sections.get(i);
 
@@ -47,10 +47,10 @@ public class AdminPanelSections extends BaseWebUITest {
             checkHeaderPresence();
 
             // Refresh current section.
-            section = browser.driver().findElements(topSectionsLocator).get(i);
+            section = browser.driver().findElements(TOP_SECTIONS_LOCATOR).get(i);
 
             // Check if menu has subsections.
-            List<WebElement> subsections = section.findElements(subsectionsLocator);
+            List<WebElement> subsections = section.findElements(SUBSECTIONS_LOCATOR);
             if (!subsections.isEmpty()) {
                 // Walk though subsections.
                 for (int j = 0; j < subsections.size(); ++j) {
@@ -60,13 +60,13 @@ public class AdminPanelSections extends BaseWebUITest {
                     checkHeaderPresence();
 
                     // Refresh current subsection.
-                    section = browser.driver().findElements(topSectionsLocator).get(i);
-                    subsections = section.findElements(subsectionsLocator);
+                    section = browser.driver().findElements(TOP_SECTIONS_LOCATOR).get(i);
+                    subsections = section.findElements(SUBSECTIONS_LOCATOR);
                 }
             }
 
             // Refresh web elements to prevent StaleElementReferenceException.
-            sections = browser.driver().findElements(topSectionsLocator);
+            sections = browser.driver().findElements(TOP_SECTIONS_LOCATOR);
         }
     }
 

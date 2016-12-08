@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.yurivan.selenium.litecart.applogic.CommonAppLogic;
+import ru.yurivan.selenium.litecart.locator.Locators;
 import ru.yurivan.selenium.litecart.test.BaseWebUITest;
 import ru.yurivan.selenium.litecart.utils.SoftAssert;
 import ru.yurivan.selenium.litecart.webdriver.Browser;
@@ -15,10 +16,6 @@ import ru.yurivan.selenium.litecart.webdriver.Browser;
 import java.util.List;
 
 public class MainPage extends BaseWebUITest {
-    private static final By PRODUCTS_LOCATOR_MOST_POPULAR = By.cssSelector("#box-most-popular ul[class*=products] li");
-    private static final By PRODUCTS_LOCATOR_CAMPAIGNS = By.cssSelector("#box-campaigns ul[class*=products] li");
-    private static final By PRODUCTS_LOCATOR_LATEST = By.cssSelector("#box-latest-products ul[class*=products] li");
-
     private Browser browser;
 
     @BeforeClass(dependsOnMethods = "setupBaseWebUITest")
@@ -38,9 +35,9 @@ public class MainPage extends BaseWebUITest {
 
         CommonAppLogic.openShopMainPage(browser);
 
-        checkProductsSticker(PRODUCTS_LOCATOR_MOST_POPULAR, sa);
-        checkProductsSticker(PRODUCTS_LOCATOR_CAMPAIGNS, sa);
-        checkProductsSticker(PRODUCTS_LOCATOR_LATEST, sa);
+        checkProductsSticker(Locators.SHOP_MAIN_PAGE_PRODUCTS_LOCATOR_MOST_POPULAR, sa);
+        checkProductsSticker(Locators.SHOP_MAIN_PAGE_PRODUCTS_LOCATOR_CAMPAIGNS, sa);
+        checkProductsSticker(Locators.SHOP_MAIN_PAGE_PRODUCTS_LOCATOR_LATEST, sa);
 
         sa.assertAll();
     }
@@ -49,7 +46,8 @@ public class MainPage extends BaseWebUITest {
     public void checkProductPage() {
         CommonAppLogic.openShopMainPage(browser);
 
-        List<WebElement> campaignsProducts = browser.driver().findElements(PRODUCTS_LOCATOR_CAMPAIGNS);
+        List<WebElement> campaignsProducts =
+                browser.driver().findElements(Locators.SHOP_MAIN_PAGE_PRODUCTS_LOCATOR_CAMPAIGNS);
         WebElement firstCampaignsProduct = campaignsProducts.get(0);
 
         final String productNameOnMainPage = firstCampaignsProduct.findElement(By.cssSelector("div.name")).getText();
@@ -66,7 +64,8 @@ public class MainPage extends BaseWebUITest {
                 productCampaignPriceOnMainPageElement.getAttribute("class");
 
         firstCampaignsProduct.click();
-        browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("box-product")));
+        browser.defaultWait().until(
+                ExpectedConditions.visibilityOfElementLocated(Locators.PRODUCT_PAGE_WAIT_LOCATOR));
 
         WebElement productBox = browser.driver().findElement(By.id("box-product"));
         final String productNameOnProductPage = productBox.findElement(By.cssSelector("div h1.title")).getText();

@@ -2,6 +2,7 @@ package ru.yurivan.selenium.litecart.applogic;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import ru.yurivan.selenium.litecart.locator.Locators;
 import ru.yurivan.selenium.litecart.managers.LiteCartSettingsManager;
 import ru.yurivan.selenium.litecart.webdriver.Browser;
 
@@ -17,9 +18,6 @@ public class CommonAppLogic {
 
     private static final By SHOP_MAIN_PAGE_WAIT_LOCATOR = By.id("box-logotypes");
 
-    private static final By ADMIN_PANEL_COUNTRIES_SECTION_WAIT_LOCATOR = By.cssSelector("[name=countries_form]");
-    private static final By ADMIN_PANEL_CATALOG_SECTION_WAIT_LOCATOR = By.cssSelector("[name=catalog_form]");
-    private static final By ADMIN_PANEL_GEO_ZONES_SECTION_WAIT_LOCATOR = By.cssSelector("[name=geo_zones_form]");
 
     public static void loginToAdminPanel(Browser browser, String login, String password) {
         browser.driver().get(settingsManager.getAdminPanelAddress());
@@ -42,18 +40,18 @@ public class CommonAppLogic {
     public static void openAdminPanelCountriesSection(Browser browser) {
         browser.driver().get(ADMIN_PANEL_COUNTRIES_SECTION_URL);
         browser.defaultWait().until(
-                ExpectedConditions.presenceOfElementLocated(ADMIN_PANEL_COUNTRIES_SECTION_WAIT_LOCATOR));
+                ExpectedConditions.presenceOfElementLocated(Locators.ADMIN_PANEL_COUNTRIES_SECTION_WAIT_LOCATOR));
     }
 
     public static void openAdminPanelCatalogSection(Browser browser) {
         browser.driver().get(ADMIN_PANEL_CATALOG_SECTION_URL);
         browser.defaultWait().until(
-                ExpectedConditions.presenceOfElementLocated(ADMIN_PANEL_CATALOG_SECTION_WAIT_LOCATOR));
+                ExpectedConditions.presenceOfElementLocated(Locators.ADMIN_PANEL_CATALOG_SECTION_WAIT_LOCATOR));
     }
 
     public static void openAdminPanelGeoZonesSection(Browser browser) {
         browser.driver().get(ADMIN_PANEL_GEO_ZONES_SECTION_URL);
         browser.defaultWait().until(
-                ExpectedConditions.presenceOfElementLocated(ADMIN_PANEL_GEO_ZONES_SECTION_WAIT_LOCATOR));
+                ExpectedConditions.presenceOfElementLocated(Locators.ADMIN_PANEL_GEO_ZONES_SECTION_WAIT_LOCATOR));
     }
 }

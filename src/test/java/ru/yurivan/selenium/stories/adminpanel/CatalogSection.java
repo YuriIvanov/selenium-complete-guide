@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.yurivan.selenium.litecart.applogic.CommonAppLogic;
+import ru.yurivan.selenium.litecart.locator.Locators;
 import ru.yurivan.selenium.litecart.managers.LiteCartSettingsManager;
 import ru.yurivan.selenium.litecart.test.BaseWebUITest;
 import ru.yurivan.selenium.litecart.utils.Generators;
@@ -20,10 +21,6 @@ import java.util.Random;
 import java.util.StringJoiner;
 
 public class CatalogSection extends BaseWebUITest {
-    private static final By ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR = By.cssSelector("#content .tabs .index");
-    private static final By ADD_NEW_PRODUCT_PAGE_INFORMATION_TAB_LOCATOR = By.id("tab-information");
-    private static final By ADD_NEW_PRODUCT_PAGE_PRICES_TAB_LOCATOR = By.id("tab-prices");
-
     private final Random random = new Random();
 
     private LiteCartSettingsManager settingsManager;
@@ -53,7 +50,7 @@ public class CatalogSection extends BaseWebUITest {
         newProductButton.click();
 
         browser.defaultWait().until(
-                ExpectedConditions.visibilityOfElementLocated(ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR));
+                ExpectedConditions.visibilityOfElementLocated(Locators.ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR));
 
         // Filling general tab.
         WebElement generalTab = browser.driver().findElement(By.id("tab-general"));
@@ -105,13 +102,13 @@ public class CatalogSection extends BaseWebUITest {
                 .sendKeys("12.12.2100");
 
         // Filling Information tab.
-        WebElement tabs = browser.driver().findElement(ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR);
+        WebElement tabs = browser.driver().findElement(Locators.ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR);
         WebElement informationTabLink = tabs.findElement(By.cssSelector("li:nth-child(2) a"));
         informationTabLink.click();
         browser.defaultWait().until(
-                ExpectedConditions.visibilityOfElementLocated(ADD_NEW_PRODUCT_PAGE_INFORMATION_TAB_LOCATOR));
+                ExpectedConditions.visibilityOfElementLocated(Locators.ADD_NEW_PRODUCT_PAGE_INFORMATION_TAB_LOCATOR));
 
-        WebElement informationTab = browser.driver().findElement(ADD_NEW_PRODUCT_PAGE_INFORMATION_TAB_LOCATOR);
+        WebElement informationTab = browser.driver().findElement(Locators.ADD_NEW_PRODUCT_PAGE_INFORMATION_TAB_LOCATOR);
 
         WebElement manufacturerElement = informationTab.findElement(By.cssSelector("[name=manufacturer_id]"));
         Select manufacturerSelect = new Select(manufacturerElement);
@@ -143,13 +140,13 @@ public class CatalogSection extends BaseWebUITest {
                 .sendKeys(Generators.randomString("Meta Description ", "", 32));
 
         // Filling Prices tab.
-        tabs = browser.driver().findElement(ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR);
+        tabs = browser.driver().findElement(Locators.ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR);
         WebElement pricesTabLink = tabs.findElement(By.cssSelector("li:nth-child(4) a"));
         pricesTabLink.click();
         browser.defaultWait().until(
-                ExpectedConditions.visibilityOfElementLocated(ADD_NEW_PRODUCT_PAGE_PRICES_TAB_LOCATOR));
+                ExpectedConditions.visibilityOfElementLocated(Locators.ADD_NEW_PRODUCT_PAGE_PRICES_TAB_LOCATOR));
 
-        WebElement pricesTab = browser.driver().findElement(ADD_NEW_PRODUCT_PAGE_PRICES_TAB_LOCATOR);
+        WebElement pricesTab = browser.driver().findElement(Locators.ADD_NEW_PRODUCT_PAGE_PRICES_TAB_LOCATOR);
 
         WebElement purchasePrice = pricesTab.findElement(By.cssSelector("[name=purchase_price]"));
         purchasePrice.clear();

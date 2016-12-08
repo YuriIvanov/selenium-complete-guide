@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import ru.yurivan.selenium.litecart.locator.Locators;
 import ru.yurivan.selenium.litecart.managers.LiteCartSettingsManager;
 import ru.yurivan.selenium.litecart.test.BaseWebUITest;
 import ru.yurivan.selenium.litecart.applogic.CommonAppLogic;
@@ -18,10 +19,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class GeoZonesSection extends BaseWebUITest {
-    private static final By GEO_ZONES_COUNTRY_NAME_CELLS_LOCATORS =
-            By.cssSelector("[name=geo_zones_form] .dataTable tbody tr.row td:nth-child(3) a");
-    private static final By ZONE_NAME_SELECTS_LOCATOR = By.cssSelector("#table-zones tbody tr td:nth-child(3) select");
-
     private LiteCartSettingsManager settingsManager;
     private Browser browser;
 
@@ -42,14 +39,14 @@ public class GeoZonesSection extends BaseWebUITest {
         CommonAppLogic.loginToAdminPanel(browser, settingsManager.getAdminPanelLogin(), settingsManager.getAdminPanelPassword());
         CommonAppLogic.openAdminPanelGeoZonesSection(browser);
 
-        List<WebElement> countries = browser.driver().findElements(GEO_ZONES_COUNTRY_NAME_CELLS_LOCATORS);
+        List<WebElement> countries = browser.driver().findElements(Locators.GEO_ZONES_COUNTRY_NAME_CELLS_LOCATORS);
         for (int i = 0; i < countries.size(); ++i) {
             WebElement country = countries.get(i);
 
             verifyCountryGeoZonesSortingOrder(country);
 
             // Refresh references.
-            countries = browser.driver().findElements(GEO_ZONES_COUNTRY_NAME_CELLS_LOCATORS);
+            countries = browser.driver().findElements(Locators.GEO_ZONES_COUNTRY_NAME_CELLS_LOCATORS);
         }
     }
 
@@ -59,7 +56,7 @@ public class GeoZonesSection extends BaseWebUITest {
         country.click();
         browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("table-zones")));
 
-        List<WebElement> zoneSelectElements = browser.driver().findElements(ZONE_NAME_SELECTS_LOCATOR);
+        List<WebElement> zoneSelectElements = browser.driver().findElements(Locators.ZONE_NAME_SELECTS_LOCATOR);
         List<String> zoneNamesOriginal =
                 zoneSelectElements
                         .stream()
