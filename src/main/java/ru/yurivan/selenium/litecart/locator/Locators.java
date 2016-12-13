@@ -38,6 +38,9 @@ public class Locators {
     public static final By CART_PAGE_ORDER_SUMMARY_TABLE_ITEMS_LOCATOR =
             By.cssSelector("#order_confirmation-wrapper [class*=dataTable] td.item");
 
+    // Country page.
+    public static final By COUNTRY_PAGE_WAIT_LOCATOR = By.id("table-zones");
+
     public static final By COUNTRY_CELLS_LOCATOR =
             By.cssSelector("[name=countries_form] .dataTable tr.row td:nth-child(5) a");
     public static final By COUNTRIES_WITH_GEO_ZONES_LOCATOR =
