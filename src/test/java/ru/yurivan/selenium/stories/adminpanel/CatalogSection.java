@@ -50,7 +50,8 @@ public class CatalogSection extends BaseWebUITest {
         newProductButton.click();
 
         browser.defaultWait().until(
-                ExpectedConditions.visibilityOfElementLocated(Locators.ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR));
+                ExpectedConditions.visibilityOfElementLocated(
+                        Locators.ADD_NEW_OR_EDIT_EXISTING_PRODUCT_PAGE_TABS_LOCATOR));
 
         // Filling general tab.
         WebElement generalTab = browser.driver().findElement(By.id("tab-general"));
@@ -102,7 +103,7 @@ public class CatalogSection extends BaseWebUITest {
                 .sendKeys("12.12.2100");
 
         // Filling Information tab.
-        WebElement tabs = browser.driver().findElement(Locators.ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR);
+        WebElement tabs = browser.driver().findElement(Locators.ADD_NEW_OR_EDIT_EXISTING_PRODUCT_PAGE_TABS_LOCATOR);
         WebElement informationTabLink = tabs.findElement(By.cssSelector("li:nth-child(2) a"));
         informationTabLink.click();
         browser.defaultWait().until(
@@ -140,7 +141,7 @@ public class CatalogSection extends BaseWebUITest {
                 .sendKeys(Generators.randomString("Meta Description ", "", 32));
 
         // Filling Prices tab.
-        tabs = browser.driver().findElement(Locators.ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR);
+        tabs = browser.driver().findElement(Locators.ADD_NEW_OR_EDIT_EXISTING_PRODUCT_PAGE_TABS_LOCATOR);
         WebElement pricesTabLink = tabs.findElement(By.cssSelector("li:nth-child(4) a"));
         pricesTabLink.click();
         browser.defaultWait().until(

@@ -15,7 +15,7 @@ public class Locators {
             By.cssSelector("#box-account-login [name=login_form] table [name=login]");
 
     // Add new product page.
-    public static final By ADD_NEW_PRODUCT_PAGE_TABS_LOCATOR = By.cssSelector("#content .tabs .index");
+    public static final By ADD_NEW_OR_EDIT_EXISTING_PRODUCT_PAGE_TABS_LOCATOR = By.cssSelector("#content .tabs .index");
     public static final By ADD_NEW_PRODUCT_PAGE_INFORMATION_TAB_LOCATOR = By.id("tab-information");
     public static final By ADD_NEW_PRODUCT_PAGE_PRICES_TAB_LOCATOR = By.id("tab-prices");
 

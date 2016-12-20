@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Temp suite." parallel="tests" thread-count="1">
+<suite name="Test suite for additional tests." parallel="tests" thread-count="1">
     <test name="Browser logs.">
         <classes>
             <class name="ru.yurivan.selenium.stories.other.BrowserLogs"/>
