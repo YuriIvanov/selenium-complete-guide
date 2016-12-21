@@ -33,11 +33,11 @@ public class Cart extends BaseWebUITest {
 
     @Test(description = "Add and remove products from cart")
     public void addRemoveProducts() {
-        final int numberDifferentProductsToAdd = 3;
+        final int numberOfDifferentProductsToAdd = 3;
         int currentNumberOfProductsInCart = 0;
 
         CommonAppLogic.openShopMainPage(browser);
-        for (int i = 0; i < numberDifferentProductsToAdd; ++i) {
+        for (int i = 0; i < numberOfDifferentProductsToAdd; ++i) {
             browser.driver()
                     .findElements(Locators.SHOP_MAIN_PAGE_PRODUCTS_LOCATOR_LATEST)
                     .get(i)
@@ -70,7 +70,7 @@ public class Cart extends BaseWebUITest {
                 .click();
         browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(Locators.CART_PAGE_WAIT_LOCATOR));
 
-        for (int i = 0; i < numberDifferentProductsToAdd; ++i) {
+        for (int i = 0; i < numberOfDifferentProductsToAdd; ++i) {
             ((JavascriptExecutor) browser.driver())
                     .executeScript(
                             "document.querySelector(arguments[0]).click()",
@@ -88,10 +88,10 @@ public class Cart extends BaseWebUITest {
 
     @Test(description = "Add and remove products from cart using pageobjects + pageblocks.")
     public void addRemoveProductsPageObjects() {
-        final int numberDifferentProductsToAdd = 3;
+        final int numberOfDifferentProductsToAdd = 3;
 
         ShopMainPage shopMainPage = ShopMainPage.open(browser);
-        for (int i = 0; i < numberDifferentProductsToAdd; ++i) {
+        for (int i = 0; i < numberOfDifferentProductsToAdd; ++i) {
             ShopProductPage shopProductPage = shopMainPage.openMostLatestProduct(i);
 
             if (shopProductPage.isSizeChooserPresent()) {
@@ -104,7 +104,7 @@ public class Cart extends BaseWebUITest {
         }
 
         ShopCartPage shopCartPage = shopMainPage.getShopHeader().getCart().checkout();
-        for (int i = 0; i < numberDifferentProductsToAdd; ++i) {
+        for (int i = 0; i < numberOfDifferentProductsToAdd; ++i) {
             shopCartPage.removeCurrentProduct();
         }
     }
