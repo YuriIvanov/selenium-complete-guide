@@ -18,7 +18,6 @@ public class CommonAppLogic {
 
     private static final By SHOP_MAIN_PAGE_WAIT_LOCATOR = By.id("box-logotypes");
 
-
     public static void loginToAdminPanel(Browser browser, String login, String password) {
         browser.driver().get(settingsManager.getAdminPanelAddress());
         browser.driver().manage().deleteAllCookies();

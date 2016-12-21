@@ -10,6 +10,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.yurivan.selenium.litecart.applogic.CommonAppLogic;
 import ru.yurivan.selenium.litecart.locator.Locators;
+import ru.yurivan.selenium.litecart.model.pageobject.ShopCartPage;
+import ru.yurivan.selenium.litecart.model.pageobject.ShopMainPage;
+import ru.yurivan.selenium.litecart.model.pageobject.ShopProductPage;
 import ru.yurivan.selenium.litecart.test.BaseWebUITest;
 import ru.yurivan.selenium.litecart.utils.FindUtils;
 import ru.yurivan.selenium.litecart.webdriver.Browser;
@@ -30,13 +33,13 @@ public class Cart extends BaseWebUITest {
 
     @Test(description = "Add and remove products from cart")
     public void addRemoveProducts() {
-        final int numberOfProductsToAdd = 3;
+        final int numberDifferentProductsToAdd = 3;
         int currentNumberOfProductsInCart = 0;
 
         CommonAppLogic.openShopMainPage(browser);
-        for (int i = 0; i < numberOfProductsToAdd; ++i) {
+        for (int i = 0; i < numberDifferentProductsToAdd; ++i) {
             browser.driver()
-                    .findElements(Locators.SHOP_MAIN_PAGE_PRODUCTS_LOCATOR_MOST_POPULAR)
+                    .findElements(Locators.SHOP_MAIN_PAGE_PRODUCTS_LOCATOR_LATEST)
                     .get(i)
                     .click();
             browser.defaultWait().until(
@@ -67,7 +70,7 @@ public class Cart extends BaseWebUITest {
                 .click();
         browser.defaultWait().until(ExpectedConditions.visibilityOfElementLocated(Locators.CART_PAGE_WAIT_LOCATOR));
 
-        for (int i = 0; i < numberOfProductsToAdd; ++i) {
+        for (int i = 0; i < numberDifferentProductsToAdd; ++i) {
             ((JavascriptExecutor) browser.driver())
                     .executeScript(
                             "document.querySelector(arguments[0]).click()",
@@ -80,6 +83,29 @@ public class Cart extends BaseWebUITest {
                                 currentNumberOfProductsInCart - 1));
                 --currentNumberOfProductsInCart;
             }
+        }
+    }
+
+    @Test(description = "Add and remove products from cart using pageobjects + pageblocks.")
+    public void addRemoveProductsPageObjects() {
+        final int numberDifferentProductsToAdd = 3;
+
+        ShopMainPage shopMainPage = ShopMainPage.open(browser);
+        for (int i = 0; i < numberDifferentProductsToAdd; ++i) {
+            ShopProductPage shopProductPage = shopMainPage.openMostLatestProduct(i);
+
+            if (shopProductPage.isSizeChooserPresent()) {
+                shopProductPage.chooseProductSize("Small");
+            }
+
+            shopProductPage.addThisProductToCart();
+
+            shopMainPage = shopProductPage.getShopHeader().openMainPage();
+        }
+
+        ShopCartPage shopCartPage = shopMainPage.getShopHeader().getCart().checkout();
+        for (int i = 0; i < numberDifferentProductsToAdd; ++i) {
+            shopCartPage.removeCurrentProduct();
         }
     }
 }
