@@ -92,7 +92,7 @@ public class Cart extends BaseWebUITest {
 
         ShopMainPage shopMainPage = ShopMainPage.open(browser);
         for (int i = 0; i < numberOfDifferentProductsToAdd; ++i) {
-            ShopProductPage shopProductPage = shopMainPage.openMostLatestProduct(i);
+            ShopProductPage shopProductPage = shopMainPage.openLatestProduct(i);
 
             if (shopProductPage.isSizeChooserPresent()) {
                 shopProductPage.chooseProductSize("Small");

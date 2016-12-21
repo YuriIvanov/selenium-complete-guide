@@ -36,7 +36,7 @@ public class ShopMainPage implements IShopHeader {
      * @param index zero-based index for most popular product list.
      * @return Page of chosen product.
      */
-    public ShopProductPage openMostLatestProduct(final int index) {
+    public ShopProductPage openLatestProduct(final int index) {
         browser.driver()
                 .findElements(Locators.SHOP_MAIN_PAGE_PRODUCTS_LOCATOR_LATEST)
                 .get(index)
